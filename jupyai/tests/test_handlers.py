@@ -1,13 +1,28 @@
 import json
 
 
-async def test_get_example(jp_fetch):
-    # When
-    response = await jp_fetch("jupyai", "get-example")
+import pytest
+from tornado.httpclient import HTTPClientError
 
-    # Then
-    assert response.code == 200
-    payload = json.loads(response.body)
-    assert payload == {
-        "data": "This is /jupyai/get-example endpoint!"
-    }
+
+async def test_autocomplete(jp_fetch):
+    with pytest.raises(HTTPClientError) as e:
+        await jp_fetch(
+            "jupyai",
+            "autocomplete",
+            method="POST",
+            body=json.dumps(
+                {
+                    "cell": {
+                        "source": "print('hello')",
+                        "id": "cellid",
+                    },
+                    "sources": [
+                        {"source": "print('hello')", "id": "cellid"},
+                        {"source": "x = 1", "id": "anotherid"},
+                    ],
+                }
+            ),
+        )
+
+    assert e.value.code == 401
