@@ -54,6 +54,9 @@ The `jlpm` command is JupyterLab's pinned version of
 `yarn` or `npm` in lieu of `jlpm` below.
 
 ```bash
+conda create --name jupyai --channel conda-forge python=3.11 'jupyterlab<5' nodejs --yes
+conda activate jupyai
+
 # Clone the repo to your local environment
 # Change directory to the jupyai directory
 # Install package in development mode
