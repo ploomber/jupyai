@@ -15,9 +15,7 @@
   "jupyter.lab.shortcuts": [
     {
       "command": "jupyai:autocomplete",
-      "keys": [
-        "Accel Enter"
-      ],
+      "keys": ["Accel Enter"],
       "selector": ".jp-Notebook.jp-mod-editMode .jp-mod-completer-enabled"
     }
   ]
