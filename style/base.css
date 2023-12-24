@@ -3,3 +3,6 @@
 
     https://jupyterlab.readthedocs.io/en/stable/developer/css.html
 */
+.jp-ToolbarButtonComponent.lm-mod-hidden {
+    display: none;
+}
