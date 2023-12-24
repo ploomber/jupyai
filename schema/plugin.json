@@ -1,0 +1,8 @@
+{
+  "jupyter.lab.shortcuts": [],
+  "title": "jupyai",
+  "description": "jupyai settings.",
+  "type": "object",
+  "properties": {},
+  "additionalProperties": false
+}

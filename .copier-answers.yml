@@ -1,0 +1,20 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v4.2.4
+_src_path: https://github.com/jupyterlab/extension-template
+author_email: contact@ploomber.io
+author_name: Ploomber
+data_format: string
+file_extension: ''
+has_binder: false
+has_settings: true
+kind: server
+labextension_name: jupyai
+mimetype: ''
+mimetype_name: ''
+project_short_description: JupyAI is an experimental package to add AI capabilities
+    to JupyterLab.
+python_name: jupyai
+repository: https://github.com/ploomber/jupyai
+test: true
+viewer_name: ''
+
