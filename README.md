@@ -19,6 +19,16 @@ To install the extension, execute:
 pip install jupyai
 ```
 
+## Usage
+
+```bash
+# set your OpenAI key
+export OPENAI_API_KEY=YOURKEY
+
+# start JupyterLab
+jupyter lab
+```
+
 ## Uninstall
 
 To remove the extension, execute:
