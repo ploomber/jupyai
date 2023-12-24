@@ -4,5 +4,13 @@
   "description": "jupyai settings.",
   "type": "object",
   "properties": {},
-  "additionalProperties": false
+  "additionalProperties": false,
+  "jupyter.lab.toolbars": {
+    "Cell": [
+      {
+        "name": "autocomplete",
+        "command": "jupyai:autocomplete"
+      }
+    ]
+  }
 }
