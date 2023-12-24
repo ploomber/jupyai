@@ -1,5 +1,4 @@
 {
-  "jupyter.lab.shortcuts": [],
   "title": "jupyai",
   "description": "jupyai settings.",
   "type": "object",
@@ -12,5 +11,14 @@
         "command": "jupyai:autocomplete"
       }
     ]
-  }
+  },
+  "jupyter.lab.shortcuts": [
+    {
+      "command": "jupyai:autocomplete",
+      "keys": [
+        "Accel Enter"
+      ],
+      "selector": ".jp-Notebook.jp-mod-editMode .jp-mod-completer-enabled"
+    }
+  ]
 }
