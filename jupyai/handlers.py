@@ -1,11 +1,15 @@
 import json
 from http import HTTPStatus
+import logging
 
 from jupyter_server.base.handlers import APIHandler
 from jupyter_server.utils import url_path_join
 import tornado
 
 from jupyai import autocomplete, exceptions
+
+
+logger = logging.getLogger(__name__)
 
 
 class RouteHandler(APIHandler):
@@ -16,6 +20,8 @@ class RouteHandler(APIHandler):
     def post(self):
         body = self.get_json_body()
 
+        logger.debug("Received request: %s", body)
+
         try:
             output = autocomplete.autocomplete(
                 body["cell"],
@@ -25,7 +31,10 @@ class RouteHandler(APIHandler):
             raise tornado.web.HTTPError(
                 HTTPStatus.UNAUTHORIZED.value, "Missing OpenAI API key"
             ) from e
+        except exceptions.BadInputException as e:
+            raise tornado.web.HTTPError(HTTPStatus.BAD_REQUEST.value, str(e)) from e
 
+        logger.debug("Sending response: %s", output)
         self.finish(json.dumps({"data": output}))
 
 
