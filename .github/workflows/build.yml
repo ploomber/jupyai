@@ -36,7 +36,7 @@ jobs:
         set -eux
         python -m pip install .[test]
 
-        pytest -vv -r ap --cov jupyai
+        pytest jupyai/tests/ -vv -r ap --cov jupyai
         jupyter server extension list
         jupyter server extension list 2>&1 | grep -ie "jupyai.*OK"
 
