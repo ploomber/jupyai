@@ -68,3 +68,12 @@ jupyter labextension list
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Alternatives
+
+[Jupyter AI](https://github.com/jupyterlab/jupyter-ai) is another extension that
+brings AI capabilities to Jupyter. It has a lot of great features!
+
+However, Jupyter AI generates code in the cell's output; hence, you need to copy-paste
+code if you want to run it or if you want to update existing code. JupyAI adds
+code to the cell itself, allowing you to edit it and run it as you'd normally do.
