@@ -9,6 +9,13 @@ JupyAI adds AI capabilities to JupyterLab:
 - Code modifications (update existing code)
 - Code fixing (fix broken code)
 
+## Notes
+
+- The prompts are hardcoded, it'd be better to add an option to customize them
+- Only OpenAI is supported for now
+
+PRs welcome!
+
 ## Requirements
 
 - JupyterLab >= 4.0.0
