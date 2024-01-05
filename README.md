@@ -36,6 +36,11 @@ export OPENAI_API_KEY=YOURKEY
 jupyter lab
 ```
 
+Once installed, you'll see a magic wand on each cell, click it to trigger code completion. You can also use CMD + ENTER.
+
+https://github.com/ploomber/jupyai/assets/989250/18447b68-3ee2-434e-b626-18fc35cb822f
+
+
 ## Uninstall
 
 To remove the extension, execute:
