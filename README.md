@@ -9,6 +9,8 @@ JupyAI adds AI capabilities to JupyterLab:
 - Code modifications (update existing code)
 - Code fixing (fix broken code)
 
+https://github.com/ploomber/jupyai/assets/989250/18447b68-3ee2-434e-b626-18fc35cb822f
+
 ## Notes
 
 - The prompts are hardcoded, it'd be better to add an option to customize them
@@ -36,10 +38,7 @@ export OPENAI_API_KEY=YOURKEY
 jupyter lab
 ```
 
-Once installed, you'll see a magic wand on each cell, click it to trigger code completion. You can also use CMD + ENTER.
-
-https://github.com/ploomber/jupyai/assets/989250/18447b68-3ee2-434e-b626-18fc35cb822f
-
+Once installed, you'll see a magic wand on each cell, click it to trigger code completion. You can also use CMD + ENTER (see demo at the top of this file).
 
 ## Uninstall
 
