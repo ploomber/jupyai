@@ -62,6 +62,7 @@ def test_generate_code(monkeypatch, openai_response, expected_output):
                 "id": "third",
             }
         ],
+        model_name="gpt-4",
     )
 
     assert response == expected_output
