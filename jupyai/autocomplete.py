@@ -210,14 +210,14 @@ class Errors(Component):
         return "\n".join([str(Error(error)) for error in self.errors])
 
 
-def run_task(system_prompt, command):
+def run_task(system_prompt, command, model_name):
     try:
         client = OpenAI()
     except:
         raise exceptions.UnauthorizedException()
 
     completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model=model_name,
         messages=[
             {
                 "role": "system",
@@ -243,7 +243,7 @@ def remove_code_fences(code: str) -> str:
     return code.strip()
 
 
-def autocomplete(cell, sources):
+def autocomplete(cell, sources, model_name):
     """
     Public API for autocompletion. This is the function that gets called when users
     trigger autocompletion from JupyterLab
@@ -256,6 +256,9 @@ def autocomplete(cell, sources):
 
     sources : list[dict]
         The list of all cells in the notebook
+
+    model_name : str
+        The name of the model to use for autocompletion.
     """
     if not sources:
         raise ValueError("Sources cannot be empty")
@@ -272,4 +275,4 @@ def autocomplete(cell, sources):
         raise ValueError("Unknown task type: " + task_type)
 
     logger.debug("Running task %s\nPrompt:\n%sCommand:\n%s", task_type, prompt, command)
-    return run_task(prompt, command)
+    return run_task(prompt, command, model_name)
