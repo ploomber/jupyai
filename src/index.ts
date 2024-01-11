@@ -73,6 +73,8 @@ const plugin: JupyterFrontEndPlugin<void> = {
             }));
           });
 
+          Notification.info('Running AI Autocomplete...', { autoClose: 1000 });
+
           requestAPI<any>('autocomplete', {
             body: JSON.stringify({
               cell: current.model.sharedModel.toJSON(),
