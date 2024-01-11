@@ -2417,6 +2417,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jupyterlab/nbformat@npm:^4.0.10":
+  version: 4.0.10
+  resolution: "@jupyterlab/nbformat@npm:4.0.10"
+  dependencies:
+    "@lumino/coreutils": ^2.1.2
+  checksum: fb2eca9389df4a48b1fa7e552200e218a2e9901f21e2735769522c0cc5824b98934b90a7b75e415dc5a9cb5c9a9ff205b6e8316c6f6eccf5716cfa7086b511cf
+  languageName: node
+  linkType: hard
+
 "@jupyterlab/notebook@npm:^4.0.9":
   version: 4.0.9
   resolution: "@jupyterlab/notebook@npm:4.0.9"
@@ -2537,7 +2546,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/settingregistry@npm:^4.0.0, @jupyterlab/settingregistry@npm:^4.0.9":
+"@jupyterlab/settingregistry@npm:^4.0.10":
+  version: 4.0.10
+  resolution: "@jupyterlab/settingregistry@npm:4.0.10"
+  dependencies:
+    "@jupyterlab/nbformat": ^4.0.10
+    "@jupyterlab/statedb": ^4.0.10
+    "@lumino/commands": ^2.1.3
+    "@lumino/coreutils": ^2.1.2
+    "@lumino/disposable": ^2.1.2
+    "@lumino/signaling": ^2.1.2
+    "@rjsf/utils": ^5.1.0
+    ajv: ^8.12.0
+    json5: ^2.2.3
+  peerDependencies:
+    react: ">=16"
+  checksum: 6521f1d01f258eb0d9c735bc00c9680e5caf3276c4e7a0fcf12006ef7aa155409e75ceda333695b7301699e00cd29a4a4d72ffced062147315144e0c59fd5971
+  languageName: node
+  linkType: hard
+
+"@jupyterlab/settingregistry@npm:^4.0.9":
   version: 4.0.9
   resolution: "@jupyterlab/settingregistry@npm:4.0.9"
   dependencies:
@@ -2553,6 +2581,19 @@ __metadata:
   peerDependencies:
     react: ">=16"
   checksum: 7d4c6f3e69ac1e66b7e7c5e53ccfb98a7e073a5a69837b814f368de247ba22f830ac567a6bb231577f6e256b2b2d9c180d50542f43891640e9a5294cb3e7a189
+  languageName: node
+  linkType: hard
+
+"@jupyterlab/statedb@npm:^4.0.10":
+  version: 4.0.10
+  resolution: "@jupyterlab/statedb@npm:4.0.10"
+  dependencies:
+    "@lumino/commands": ^2.1.3
+    "@lumino/coreutils": ^2.1.2
+    "@lumino/disposable": ^2.1.2
+    "@lumino/properties": ^2.0.1
+    "@lumino/signaling": ^2.1.2
+  checksum: 4032966b981c775f53b28137cde3b7c215444e898e9570b2f814c2fb1ee1d8f023702287a61d7d4267fffb71e9d8bdc2e79d165f0238a59ec0fea717540f0324
   languageName: node
   linkType: hard
 
@@ -7184,7 +7225,7 @@ __metadata:
     "@jupyterlab/builder": ^4.0.0
     "@jupyterlab/coreutils": ^6.0.0
     "@jupyterlab/services": ^7.0.0
-    "@jupyterlab/settingregistry": ^4.0.0
+    "@jupyterlab/settingregistry": ^4.0.10
     "@jupyterlab/testutils": ^4.0.0
     "@types/jest": ^29.2.0
     "@types/json-schema": ^7.0.11
