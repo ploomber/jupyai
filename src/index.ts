@@ -67,14 +67,12 @@ const plugin: JupyterFrontEndPlugin<void> = {
 
         // Listen for your plugin setting changes using Signal
         setting.changed.connect(loadSetting);
-
       })
       .catch(reason => {
         console.error(
           `Something went wrong when reading the settings.\n${reason}`
         );
       });
-
 
     /* Adds a command enabled only on code cell */
     commands.addCommand(CommandIds.runCodeCell, {
@@ -95,13 +93,15 @@ const plugin: JupyterFrontEndPlugin<void> = {
             }));
           });
 
-          Notification.info(`Running AI Autocomplete with ${modelName}`, { autoClose: 1000 });
+          Notification.info(`Running AI Autocomplete with ${modelName}`, {
+            autoClose: 1000
+          });
 
           requestAPI<any>('autocomplete', {
             body: JSON.stringify({
               cell: current.model.sharedModel.toJSON(),
               sources: sources,
-              model_name: modelName,
+              model_name: modelName
             }),
             method: 'POST'
           })

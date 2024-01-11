@@ -2,7 +2,6 @@
 
 [![Github Actions Status](https://github.com/ploomber/jupyai/workflows/Build/badge.svg)](https://github.com/ploomber/jupyai/actions/workflows/build.yml)
 
-
 JupyAI adds AI capabilities to JupyterLab:
 
 - Code generation (generate code based on a prompt)
