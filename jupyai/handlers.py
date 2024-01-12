@@ -26,6 +26,7 @@ class RouteHandler(APIHandler):
             output = autocomplete.autocomplete(
                 body["cell"],
                 body["sources"],
+                body["model_name"],
             )
         except exceptions.UnauthorizedException as e:
             raise tornado.web.HTTPError(

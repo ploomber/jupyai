@@ -23,6 +23,24 @@ from jupyai import autocomplete
             "",
             [],
         ],
+        [
+            {
+                "source": "# update code to do x\nnumber = 1",
+                "id": "first",
+            },
+            "update code to do x",
+            "number = 1",
+            [],
+        ],
+        [
+            {
+                "source": "# update code to do x\n# and y\nnumber = 10",
+                "id": "first",
+            },
+            "update code to do x and y",
+            "number = 10",
+            [],
+        ],
     ],
 )
 def test_parse_cell(cell, expected_command, expected_code, expected_errors):
@@ -36,8 +54,8 @@ def test_parse_cell(cell, expected_command, expected_code, expected_errors):
 @pytest.mark.parametrize(
     "openai_response, expected_output",
     [
-        ["x + y", "x + y"],
-        ["\n```python\nx + y\n```", "x + y"],
+        ["x + y", "# generate code to add x and y\nx + y"],
+        ["\n```python\nx + y\n```", "# generate code to add x and y\nx + y"],
     ],
 )
 def test_generate_code(monkeypatch, openai_response, expected_output):
@@ -62,6 +80,7 @@ def test_generate_code(monkeypatch, openai_response, expected_output):
                 "id": "third",
             }
         ],
+        model_name="gpt-4",
     )
 
     assert response == expected_output

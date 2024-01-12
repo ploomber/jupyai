@@ -59,7 +59,7 @@
         "@jupyterlab/application": "^4.0.0",
         "@jupyterlab/coreutils": "^6.0.0",
         "@jupyterlab/services": "^7.0.0",
-        "@jupyterlab/settingregistry": "^4.0.0"
+        "@jupyterlab/settingregistry": "^4.0.10"
     },
     "devDependencies": {
         "@jupyterlab/builder": "^4.0.0",

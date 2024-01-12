@@ -2,7 +2,6 @@
 
 [![Github Actions Status](https://github.com/ploomber/jupyai/workflows/Build/badge.svg)](https://github.com/ploomber/jupyai/actions/workflows/build.yml)
 
-
 JupyAI adds AI capabilities to JupyterLab:
 
 - Code generation (generate code based on a prompt)
@@ -11,7 +10,17 @@ JupyAI adds AI capabilities to JupyterLab:
 
 https://github.com/ploomber/jupyai/assets/989250/18447b68-3ee2-434e-b626-18fc35cb822f
 
-## Notes
+## User notes
+
+To switch the model (defaults to `gpt-3.5-turbo`), open JupyterLab preferences, type JupyAI and you'll see
+a text field to change the model name. For example, to switch to GPT-4, enter `gpt-4`.
+
+To see the valid values, consult
+[OpenAI's documentation.](https://platform.openai.com/docs/models/overview)
+
+![](docs/static/settings.png)
+
+## Development notes
 
 - The prompts are hardcoded, it'd be better to add an option to customize them
 - Only OpenAI is supported for now

@@ -21,6 +21,7 @@ async def test_autocomplete(jp_fetch):
                         {"source": "print('hello')", "id": "cellid"},
                         {"source": "x = 1", "id": "anotherid"},
                     ],
+                    "model_name": "gpt-4",
                 }
             ),
         )

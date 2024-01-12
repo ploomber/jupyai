@@ -2,7 +2,14 @@
   "title": "jupyai",
   "description": "jupyai settings.",
   "type": "object",
-  "properties": {},
+  "properties": {
+    "modelName": {
+      "type": "string",
+      "title": "Model name",
+      "description": "Model used for autocompletion.",
+      "default": "gpt-3.5-turbo"
+    }
+  },
   "additionalProperties": false,
   "jupyter.lab.toolbars": {
     "Cell": [

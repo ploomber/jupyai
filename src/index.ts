@@ -11,6 +11,8 @@ import { Notification } from '@jupyterlab/apputils';
 import { requestAPI } from './handler';
 import { INotebookContent } from '@jupyterlab/nbformat';
 
+const PLUGIN_ID = 'jupyai:plugin';
+
 const CommandIds = {
   /**
    * Command to trigger AI autocomplete.
@@ -27,32 +29,50 @@ const wandIcon = new LabIcon({
  * Initialization data for the jupyai extension.
  */
 const plugin: JupyterFrontEndPlugin<void> = {
-  id: 'jupyai:plugin',
+  id: PLUGIN_ID,
   description:
     'JupyAI is an experimental package to add AI capabilities to JupyterLab.',
   autoStart: true,
-  optional: [ISettingRegistry],
-  requires: [INotebookTracker],
+  requires: [INotebookTracker, ISettingRegistry],
   activate: (
     app: JupyterFrontEnd,
     tracker: INotebookTracker,
-    settingRegistry: ISettingRegistry | null
+    settings: ISettingRegistry
   ) => {
     console.log('JupyterLab extension jupyai is activated!');
-
-    // getting an error when calling .load
-    // if (settingRegistry) {
-    //   settingRegistry
-    //     .load(plugin.id)
-    //     .then(settings => {
-    //       console.log('jupyai settings loaded:', settings.composite);
-    //     })
-    //     .catch(reason => {
-    //       console.error('Failed to load settings for jupyai.', reason);
-    //     });
-    // }
-
     const { commands } = app;
+
+    let modelName = 'gpt-3.5-turbo';
+
+    /**
+     * Load the settings for this extension
+     *
+     * @param setting Extension settings
+     */
+    function loadSetting(setting: ISettingRegistry.ISettings): void {
+      // Read the settings and convert to the correct type
+      modelName = setting.get('modelName').composite as string;
+
+      console.log(
+        `Settings Example extension: model name is set to '${modelName}'`
+      );
+    }
+
+    // Wait for the application to be restored and
+    // for the settings for this plugin to be loaded
+    Promise.all([app.restored, settings.load(PLUGIN_ID)])
+      .then(([, setting]) => {
+        // Read the settings
+        loadSetting(setting);
+
+        // Listen for your plugin setting changes using Signal
+        setting.changed.connect(loadSetting);
+      })
+      .catch(reason => {
+        console.error(
+          `Something went wrong when reading the settings.\n${reason}`
+        );
+      });
 
     /* Adds a command enabled only on code cell */
     commands.addCommand(CommandIds.runCodeCell, {
@@ -73,10 +93,15 @@ const plugin: JupyterFrontEndPlugin<void> = {
             }));
           });
 
+          Notification.info(`Running AI Autocomplete with ${modelName}`, {
+            autoClose: 1000
+          });
+
           requestAPI<any>('autocomplete', {
             body: JSON.stringify({
               cell: current.model.sharedModel.toJSON(),
-              sources: sources
+              sources: sources,
+              model_name: modelName
             }),
             method: 'POST'
           })
