@@ -71,17 +71,19 @@ prompt_modify_code = """
 You are a helpful Python code modifier. Your job is to modify Python code based on
 a command given by the user  (wrapped between [COMMAND] [/COMMAND] tags).
 
-You should limit yourself to return an updated
-Python code, that is, no markdown and no raw text (Python commends are fine). The
-user code will be given between [CODE] and [/CODE] tags. While the user command
-will be given between [COMMAND] and [/COMMAND] tags. You must update the code
-based on the command. Your output must be runnable
-Python code (comments ok), that is, it should not contain [CODE] or [/CODE] tags.
-User's code might refer to existing code. Code that exist in previous lines will
-be given between [CODE_PREV] and [/CODE_PREV] tags. Code that exist in following
-lines will be given between [CODE_POST] and [/CODE_POST] tags. 
+You should limit yourself to return an updated Python code, that is, no markdown and
+no raw text (Python commends are fine). The user code will be given between
+[CODE] and [/CODE] tags. When a user says "modify code" or "this code", you should
+modify the code between [CODE] and [/CODE] tags.
 
-When generating output, you must re-use existing variables and only generate new code,
+The user command will be given between [COMMAND] and [/COMMAND] tags. You must update
+the code based on the command. Your output must be runnable
+Python code (comments ok), that is, it should not contain [CODE] or [/CODE] tags.
+
+User's code might refer to existing variables. Code that exist in previous lines will
+be given between [CODE_PREV] and [/CODE_PREV] tags. Code that exist in following
+lines will be given between [CODE_POST] and [/CODE_POST] tags.  When generating
+output, you must re-use existing variables and only generate new code,
 your output should not contain code that already exists in previous lines.
 """
 
@@ -92,18 +94,17 @@ def _parse_cell(cell):
     if not cell_source.replace("#", "").strip():
         raise exceptions.BadInputException("Cell cannot be empty")
 
-    source_lines = cell_source.split("\n")
+    source_lines = cell_source.split("\n") + [""]
 
-    # find first line that's not a comment
-    for i, line in enumerate(source_lines, start=1):
+    for i, line in enumerate(source_lines):
         if not line.lstrip().startswith("#"):
             break
 
     # get the top comment (user's command)
-    command = " ".join(line.strip()[1:].strip() for line in source_lines[:i])
+    command = " ".join(line.strip()[1:].strip() for line in source_lines[:i]).strip()
 
     # get remaining lines
-    code = "\n".join(source_lines[i:])
+    code = "\n".join(source_lines[i:]).strip()
 
     errors = _get_output_errors(cell)
 
@@ -118,7 +119,7 @@ def _get_output_errors(cell):
     ]
 
 
-def parse_command(cell, sources):
+def parse_notebook(cell, sources):
     command, code, errors = _parse_cell(cell)
 
     cell_id = cell["id"]
@@ -133,17 +134,26 @@ def parse_command(cell, sources):
     code_post = [cell["source"] for cell in sources[i + 1 :]]
 
     if errors:
-        return TaskType.FIX_CODE, Command(command) + str(CodePrev(code_prev)) + str(
-            CodePost(code_post)
-        ) + str(Errors(errors))
-
-    if code:
-        return TaskType.MODIFY_CODE, Command(command) + str(CodePrev(code_prev)) + str(
-            CodePost(code_post)
+        return (
+            TaskType.FIX_CODE,
+            command,
+            Command(command)
+            + str(CodePrev(code_prev))
+            + str(CodePost(code_post))
+            + str(Errors(errors)),
         )
 
-    return TaskType.GENERATE_CODE, Command(command) + str(CodePrev(code_prev)) + str(
-        CodePost(code_post)
+    if code:
+        return (
+            TaskType.MODIFY_CODE,
+            command,
+            Command(command) + str(CodePrev(code_prev)) + str(CodePost(code_post)),
+        )
+
+    return (
+        TaskType.GENERATE_CODE,
+        command,
+        Command(command) + str(CodePrev(code_prev)) + str(CodePost(code_post)),
     )
 
 
@@ -263,7 +273,7 @@ def autocomplete(cell, sources, model_name):
     if not sources:
         raise ValueError("Sources cannot be empty")
 
-    task_type, command = parse_command(cell, sources)
+    task_type, command, content = parse_notebook(cell, sources)
 
     if task_type == TaskType.GENERATE_CODE:
         prompt = prompt_generate_code
@@ -274,5 +284,7 @@ def autocomplete(cell, sources, model_name):
     else:
         raise ValueError("Unknown task type: " + task_type)
 
-    logger.debug("Running task %s\nPrompt:\n%sCommand:\n%s", task_type, prompt, command)
-    return run_task(prompt, command, model_name)
+    logger.debug("Running task %s\nPrompt:\n%scontent:\n%s", task_type, prompt, content)
+    output = run_task(prompt, content, model_name)
+
+    return f"# {command}\n{output}" if command else output
