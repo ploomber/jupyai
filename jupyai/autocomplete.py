@@ -2,11 +2,13 @@ import logging
 from enum import Enum
 from os import environ
 
+from ploomber_core.telemetry import Telemetry
 from openai import OpenAI
 
 from jupyai import exceptions
 
 logger = logging.getLogger(__name__)
+telemetry = Telemetry.from_package("jupyai")
 
 if environ.get("JUPYAI_DEBUG"):
     # Set the logger's level to DEBUG
@@ -253,6 +255,7 @@ def remove_code_fences(code: str) -> str:
     return code.strip()
 
 
+@telemetry.log_call()
 def autocomplete(cell, sources, model_name):
     """
     Public API for autocompletion. This is the function that gets called when users
