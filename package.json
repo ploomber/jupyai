@@ -1,6 +1,6 @@
 {
     "name": "jupyai",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "JupyAI is an experimental package to add AI capabilities to JupyterLab.",
     "keywords": [
         "jupyter",
