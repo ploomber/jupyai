@@ -14,23 +14,6 @@ JupyAI adds AI capabilities to JupyterLab:
 
 https://github.com/ploomber/jupyai/assets/989250/18447b68-3ee2-434e-b626-18fc35cb822f
 
-## User notes
-
-To switch the model (defaults to `gpt-3.5-turbo`), open JupyterLab preferences, type JupyAI and you'll see
-a text field to change the model name. For example, to switch to GPT-4, enter `gpt-4`.
-
-To see the valid values, consult
-[OpenAI's documentation.](https://platform.openai.com/docs/models/overview)
-
-![](docs/static/settings.png)
-
-## Development notes
-
-- The prompts are hardcoded, it'd be better to add an option to customize them
-- Only OpenAI is supported for now
-
-PRs welcome!
-
 ## Requirements
 
 - JupyterLab >= 4.0.0
@@ -52,6 +35,25 @@ jupyter lab
 ```
 
 Once installed, you'll see a magic wand on each cell, click it to trigger code completion. You can also use CMD + ENTER (see demo at the top of this file).
+
+
+## User notes
+
+To switch the model (defaults to `gpt-3.5-turbo`), open JupyterLab preferences, type JupyAI and you'll see
+a text field to change the model name. For example, to switch to GPT-4, enter `gpt-4`.
+
+To see the valid values, consult
+[OpenAI's documentation.](https://platform.openai.com/docs/models/overview)
+
+![](docs/static/settings.png)
+
+## Development notes
+
+- The prompts are hardcoded, it'd be better to add an option to customize them
+- Only OpenAI is supported for now
+
+PRs welcome!
+
 
 ## Uninstall
 
