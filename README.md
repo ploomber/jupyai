@@ -1,5 +1,9 @@
 # JupyAI
 
+> [!NOTE]
+> Deploy AI apps for free on [Ploomber Cloud!](https://ploomber.io/)
+
+
 [![Github Actions Status](https://github.com/ploomber/jupyai/workflows/Build/badge.svg)](https://github.com/ploomber/jupyai/actions/workflows/build.yml)
 
 JupyAI adds AI capabilities to JupyterLab:
