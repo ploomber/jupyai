@@ -1,7 +1,7 @@
 # JupyAI
 
-> [!NOTE]
-> Deploy AI apps for free on [Ploomber Cloud!](https://ploomber.io/)
+> [!TIP]
+> Deploy AI apps for free on [Ploomber Cloud!](https://ploomber.io/?utm_medium=github&utm_source=jupyai)
 
 
 [![Github Actions Status](https://github.com/ploomber/jupyai/workflows/Build/badge.svg)](https://github.com/ploomber/jupyai/actions/workflows/build.yml)
